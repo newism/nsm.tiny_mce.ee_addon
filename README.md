@@ -1,12 +1,12 @@
 # NSM TinyMCE 1.0.0a1
 
-Written by: Leevi Graham, Technical Director of Newism, based on LG TinyMCE (EE1.x)
+Written by: Leevi Graham ([Twitter](http://twitter.com/leevigraham) | [Website](http://leevigraham.com)), Technical Director of [Newism](http://newism.com.au), based on [LG TinyMCE](http://leevigraham.com/cms-customisation/expressionengine/lg-tinymce/) (EE1.x)
 
-NSM TinyMCE is an ExpressionEngine 2 custom field that converts standard text areas to [TinyMCE (Moxicode)](http://tinymce.moxiecode.com/) WYSIWYG editors.
+NSM TinyMCE is an [ExpressionEngine 2](http://expressionengine.com/index.php?affiliate=newism&amp;page=public_beta/index) custom field that converts standard text areas to [TinyMCE (Moxicode)](http://tinymce.moxiecode.com/) WYSIWYG editor.
 
 ## Notes
 
-This custom field has only been tested on EE2.0 Beta 1 Build 20091207 and requires some very minor core hacking to enable custom field custom settings. Build 20091211 should be ok but the code changes might not be in the exactly the same place. See the installation instructions.
+This custom field has only been tested on EE2.0 Beta 1 [Build 20091207](http://expressionengine.comindex.php?affiliate=newism&page=/forums/viewthread/137647/) and requires some very minor core hacking to enable custom field custom settings. Build 20091211 should be ok but the code changes might not be in the exactly the same place. See the installation instructions.
 
 TinyMCE version 3.2.7 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
 
@@ -45,8 +45,8 @@ TinyMCE config files are located in `/system/expressionengine/third_party/nsm_ti
 
 1. Add a new table col titled `field_settings` to `exp_extensions` and set the data type to 'text'
 2. In <code>/system/expressionengine/controllers/cp/admin_content.php</code>:
-	- Line 4514: Uncomment `$native_settings['field_settings'] = base64_encode(serialize($ft_settings));`
-	- Line 4464: Add `'field_settings'` to the `$native` array variable.
+	- _Line 4514_: Uncomment `$native_settings['field_settings'] = base64_encode(serialize($ft_settings));`
+	- _Line 4464_: Add `'field_settings'` to the `$native` array variable.
 
 ## Todo
 
