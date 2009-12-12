@@ -43,7 +43,7 @@ TinyMCE config files are located in `/system/expressionengine/third_party/nsm_ti
 
 ### Core hacks for build 20091207
 
-1. Add a new table col titled `field_settings` to `exp_extensions` and set the data type to 'text'
+1. Add a new table col titled `field_settings` to `exp_channel_fields` and set the data type to 'text'
 2. In <code>/system/expressionengine/controllers/cp/admin_content.php</code>:
 	- _Line 4514_: Uncomment `$native_settings['field_settings'] = base64_encode(serialize($ft_settings));`
 	- _Line 4464_: Add `'field_settings'` to the `$native` array variable.
