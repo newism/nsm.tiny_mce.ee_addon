@@ -14,16 +14,18 @@ TinyMCE version 3.2.7 is included with the addon. Please review the [TinyMCE lic
 
 TinyMCE config files are located in `/system/expressionengine/third_party/nsm_tiny_mce/config/tiny_mce` and are loaded as CI Views into the footer of the CP. One variable is passed through `$field_class` which should be used to uniquely identify fields with different configurations like so:
 
-	tinyMCE.init({  
-		button_tile_map : true,  
-		editor_selector : '<?= $field_class ?>',  
-		mode:'textareas',  
-		theme : 'advanced',  
-		height : 300,  
-		width : "99%",  
-	});
+	<script language="javascript" type="text/javascript">
+		tinyMCE.init({
+			button_tile_map : true,
+			editor_selector : '<?= $field_class ?>',
+			mode:'textareas',
+			theme : 'advanced',
+			height : 300,
+			width : "99%",
+		});
+	</script>
 
-Configuration files must contain the opening and closing script tags.
+**Configuration files must contain the opening and closing script tags.**
 
 ## Features
 
@@ -32,7 +34,7 @@ Configuration files must contain the opening and closing script tags.
 
 ## Installation
 
-1. Copy `/system/expressionengine/third_party/nsm_tiny_mce` to `/your_system_folder/expressionengine/third_party/nsm_tiny\_mce`
+1. Copy `/system/expressionengine/third_party/nsm_tiny_mce` to `/your_system_folder/expressionengine/third_party/nsm_tiny_mce`
 
 ### Core hacks for build 20091207
 
@@ -50,9 +52,9 @@ Configuration files must contain the opening and closing script tags.
 ## Known issues
 
 1. PHP error on Add/Edit custom field page:  
-	<code>A PHP Error was encountered  
-	Severity: Notice  
-	Message: Undefined variable: field_type  
-	Filename: cp/admin_content.php  
-	Line Number: 3898</code>
+	<pre><code>A PHP Error was encountered
+Severity: Notice
+Message: Undefined variable: field_type
+Filename: cp/admin_content.php
+Line Number: 3898</code></pre>
 2. There is some craziness when you click the _view source_ toolbar button with mutiple fields in the same publish form.
