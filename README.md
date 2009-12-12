@@ -32,6 +32,11 @@ TinyMCE config files are located in `/system/expressionengine/third_party/nsm_ti
 * Multiple configurations
 * Per field configuration
 
+## Screenshots
+
+[![NSM TinyMCE custom field settings](http://s3.amazonaws.com/ember/T8QlIz969laR9TZNHFcAhSbxAxCXwOAV_s.jpg "NSM TinyMCE custom field settings")](http://emberapp.com/leevigraham/images/nsm-tinymce-custom-field-settings-1/sizes/l)
+[![NSM TinyMCE publish form](http://s3.amazonaws.com/ember/Lx7NaGhbP2nn2kJoB4RMzEUUjuGVMgpq_s.jpg "NSM TinyMCE publish form")](http://emberapp.com/leevigraham/images/nsm-tinymce-ee2-custom-field/sizes/l)
+
 ## Installation
 
 1. Copy `/system/expressionengine/third_party/nsm_tiny_mce` to `/your_system_folder/expressionengine/third_party/nsm_tiny_mce`
