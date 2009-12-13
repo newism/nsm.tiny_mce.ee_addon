@@ -8,6 +8,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
  * @version			1.0.0a1
  * @author			Leevi Graham <leevi@newism.com.au>
  * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
+ * @see				http://expressionengine.com/public_beta/docs/development/fieldtypes.html
 *
 */
 class Nsm_tiny_mce_ft extends EE_Fieldtype
@@ -22,6 +23,14 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		'name'		=> 'NSM TinyMCE',
 		'version'	=> '1.0.0a1'
 	);
+
+	/**
+	 * The field settings array
+	 * 
+	 * @access public
+	 * @var array
+	 */
+	public $settings = array();
 
 	/**
 	 * Path to the TinyMCE config files. Set in the constructor
@@ -58,7 +67,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 * Display the field in the publish form
 	 * 
 	 * @access public
-	 * @param $data String The field content
+	 * @param $data String Contains the current field data. Blank for new entries.
 	 * @return String The custom field HTML
 	 * 
 	 * Includes the TinyMCE base script and the field specific configuration.
@@ -139,8 +148,10 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 * Replaces the custom field tag
 	 * 
 	 * @access public
-	 * @param $data string The field contents
-	 * @param $params array No idea what this is yet, thinking it could be the tag params?
+	 * @param $data string Contains the field data (or prepped data, if using pre_process)
+	 * @param $params array Contains field parameters (if any)
+	 * @param $tagdata mixed Contains data between tag (for tag pairs) FALSE for single tags
+	 * @return string The HTML replacing the tag
 	 * 
 	 */
 	public function replace_tag($data, $params = FALSE, $tagdata = FALSE)
@@ -170,8 +181,8 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	/**
 	 * Publish form validation
 	 * 
-	 * @param $data array Not sure what this is yet, probably the submitted post data.
-	 * @return boolean Valid or not
+	 * @param $data array Contains the submitted field data.
+	 * @return mixed TRUE or an error message
 	 */
 	public function validate($data)
 	{
