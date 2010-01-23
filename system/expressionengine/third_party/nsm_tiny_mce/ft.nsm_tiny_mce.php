@@ -1,6 +1,4 @@
-<?php
-
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * @package			NSM
@@ -112,7 +110,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 * @param $data mixed Not sure what this data is yet :S
 	 * @return string Override the field custom settings with custom html
 	 * 
-	 * In this case we add an extra row to the table. Not sure how the tabe is built
+	 * In this case we add an extra row to the table. Not sure how the table is built
 	 */
 	public function display_settings($data)
 	{
