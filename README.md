@@ -12,7 +12,12 @@ TinyMCE version 3.2.7 is included with the addon. Please review the [TinyMCE lic
 
 ### Config files
 
-TinyMCE config files are located in `/system/expressionengine/third_party/nsm_tiny_mce/config/tiny_mce` and are loaded as CI Views into the footer of the CP. One variable is passed through `$field_class` which should be used to uniquely identify fields with different configurations like so:
+TinyMCE config files are located in `/system/expressionengine/third_party/nsm_tiny_mce/config/tiny_mce` and are loaded as CI Views into the footer of the CP. 
+
+There are two variables passed into the config that allow further customisation from the field configuration.
+
+* `$field_class` - used to uniquely identify fields with different configurations.
+* `$field_height` - used to set the height of the TinyMCE WYSIWYG.
 
 	<script language="javascript" type="text/javascript">
 		tinyMCE.init({
@@ -20,7 +25,7 @@ TinyMCE config files are located in `/system/expressionengine/third_party/nsm_ti
 			editor_selector : '<?= $field_class ?>',
 			mode:'textareas',
 			theme : 'advanced',
-			height : 300,
+			height : <?= $field_height ?>,
 			width : "99%",
 		});
 	</script>
