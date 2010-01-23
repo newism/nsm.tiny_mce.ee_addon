@@ -73,13 +73,13 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public function display_field($data)
 	{
-		$field_class = $this->field_type . "-" . preg_replace('#[^a-zA-Z0-9]#', "", substr($this->settings['field_tiny_mce_conf'], 0, -4));
-
 		if(isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']) === FALSE)
 		{
 			$script_url = $this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/tiny_mce/tiny_mce.js";
 			$this->EE->cp->add_to_head("<script src='".$script_url."' type='text/javascript' charset='utf-8'></script>");
 		}
+
+		$field_class = $this->field_type . "-" . substr($this->settings['field_tiny_mce_conf'], 0, -4);
 
 		if(isset($this->EE->session->cache[__CLASS__]['loaded_configs'][$this->settings['field_tiny_mce_conf']]) === FALSE)
 		{
@@ -87,7 +87,10 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 				$this->EE->session->cache[__CLASS__]['loaded_configs'][$this->settings['field_tiny_mce_conf']] = $this->EE->load->_ci_load(
 					array(
 						'_ci_path' => $this->tiny_mce_config_path . $this->settings['field_tiny_mce_conf'],
-						'_ci_vars' => array('field_class' => $field_class),
+						'_ci_vars' => array(
+							'field_class' => $field_class,
+							'field_height' => $this->settings['field_tiny_mce_height']
+						),
 						'_ci_return' => TRUE
 					)
 				)
@@ -140,6 +143,12 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 				: "<p class='notice'>No configuration files could be found. Check that <code>".$this->tiny_mce_config_path."</code> is readable and contains at least one configuration file.</p>"
 				 . form_hidden($this->field_type.'_field_settings[field_tiny_mce_conf]', '')
 		);
+
+		$this->EE->table->add_row(
+			lang('TinyMCE hight in px', 'field_tiny_mce_height'),
+			form_input($this->field_type.'_field_settings[field_tiny_mce_height]', ($data['field_tiny_mce_height']) ? $data['field_tiny_mce_height'] : 300)
+		);
+
 	}
 
 	/**
@@ -173,7 +182,12 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public function save_settings($data)
 	{
-		return $this->EE->input->post('nsm_tiny_mce_field_settings');
+		$new_settings = $this->EE->input->post('nsm_tiny_mce_field_settings');
+		if(empty($new_settings["field_tiny_mce_height"]))
+		{
+			$new_settings["field_tiny_mce_height"] = 300;
+		}
+		return $new_settings;
 	}
 
 	/**

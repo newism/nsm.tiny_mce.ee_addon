@@ -6,7 +6,7 @@ tinyMCE.init({
 	editor_selector : '<?= $field_class ?>',
 	mode:'textareas',
 	theme : 'advanced',
-	height : 100,
+	height : <?= $field_height ?>,
 	width : "99%",
 
 	// Cleanup/Output
