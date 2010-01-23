@@ -77,6 +77,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		{
 			$script_url = $this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/tiny_mce/tiny_mce.js";
 			$this->EE->cp->add_to_head("<script src='".$script_url."' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
 		}
 
 		$field_class = $this->field_type . "-" . substr($this->settings['field_tiny_mce_conf'], 0, -4);
