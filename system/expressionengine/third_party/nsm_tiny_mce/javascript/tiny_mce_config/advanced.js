@@ -1,12 +1,9 @@
-<script language="javascript" type="text/javascript">
-// Basic configuration for TinyMCE listing all the options
-tinyMCE.init({
+// Advanced configuration for TinyMCE listing all the options
+NsmTinyMCEConfigs.advanced = {
 
 	button_tile_map : true,
-	editor_selector : '<?= $field_class ?>',
-	mode:'textareas',
+	mode: 'none',
 	theme : 'advanced',
-	height : <?= $field_height ?>,
 	width : "99%",
 
 	// Cleanup/Output
@@ -35,16 +32,22 @@ tinyMCE.init({
 	theme_advanced_resizing : true,
 
 	/* 
-	Basic configuration
-	My Favs - Simple but effective
+	Advanced Configuration
+	Every button and plugin in the world. With great power come shitty code...
 	*/
-	plugins : 'safari,pagebreak,style,inlinepopups,media,contextmenu,paste,'
-	+ 'fullscreen,nonbreaking,xhtmlxtras',
-	theme_advanced_buttons1 : 'cut,copy,pastetext,|,formatselect,|,bold,italic,'
-	+ 'strikethrough,acronym,abbr,ins,del,nonbreaking,|,bullist,numlist,outdent,'
-	+ 'indent,|,link,unlink,|,image,|,visualaid,fullscreen,|,cleanup,removeformat,code',
-	theme_advanced_buttons2 : '',
-	theme_advanced_buttons3 : '',
+	plugins : ''
+	+ 'safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,'
+	+ 'inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,'
+	+ 'directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template',
+	theme_advanced_buttons1 : 'save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,'
+	+ 'justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect',
+	theme_advanced_buttons2 : 'cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,'
+	+ '|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime'
+	+ 'preview,|,forecolor,backcolor',
+	theme_advanced_buttons3 : 'tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,'
+	+ 'iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen',
+	theme_advanced_buttons4 : 'insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,'
+	+ 'acronym,del,ins,|,visualchars,nonbreaking',
 
 	// Really Long Settings
 	entities : ''
@@ -333,5 +336,4 @@ tinyMCE.init({
 	+'|onmouseup|style|title|type],'
 	+'var[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress'
 	+'|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style'
-});
-</script>
+};
