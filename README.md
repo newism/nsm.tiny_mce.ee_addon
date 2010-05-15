@@ -49,5 +49,5 @@ The key must be named the same as the actual file name. ie. If the configuration
 ## Todo
 
 1. Add PHP Compressor support
-2. Fix Matrix cell settings bug
-3. Add NSM Addon Updater integration
+2. Add NSM Addon Updater integration
+3. Fix Matrix cell settings bug
