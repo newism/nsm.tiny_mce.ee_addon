@@ -3,7 +3,7 @@
 /**
  * @package			NSM
  * @subpackage		tiny_mce
- * @version			1.0.0a1
+ * @version			1.0.0a2
  * @author			Leevi Graham <leevi@newism.com.au>
  * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
  * @see				http://expressionengine.com/public_beta/docs/development/fieldtypes.html
