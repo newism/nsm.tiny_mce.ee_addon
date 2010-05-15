@@ -57,100 +57,15 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	public function __construct()
 	{
 		parent::EE_Fieldtype();
-		$this->tiny_mce_config_path = PATH_THIRD . "nsm_tiny_mce/config/tiny_mce/";
+
+		$this->tiny_mce_config_path = PATH_THIRD . "nsm_tiny_mce/javascript/tiny_mce_config/";
 		$this->field_type = strtolower(substr(__CLASS__, 0, -3));
+
+		if(!isset($this->EE->session->cache[__CLASS__]))
+		{
+			$this->EE->session->cache[__CLASS__]['loaded_configs'] = array();
+		}
 	}	
-
-	/**
-	 * Display the field in the publish form
-	 * 
-	 * @access public
-	 * @param $data String Contains the current field data. Blank for new entries.
-	 * @return String The custom field HTML
-	 * 
-	 * Includes the TinyMCE base script and the field specific configuration.
-	 * Returns a standard textarea with a configuration specific class
-	 */
-	public function display_field($data)
-	{
-		if(isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']) === FALSE)
-		{
-			$script_url = $this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/tiny_mce/tiny_mce.js";
-			$this->EE->cp->add_to_head("<script src='".$script_url."' type='text/javascript' charset='utf-8'></script>");
-			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
-		}
-
-		$field_class = $this->field_type . "-" . substr($this->settings['field_tiny_mce_conf'], 0, -4);
-
-		if(isset($this->EE->session->cache[__CLASS__]['loaded_configs'][$this->settings['field_tiny_mce_conf']]) === FALSE)
-		{
-			$this->EE->cp->add_to_head(
-				$this->EE->session->cache[__CLASS__]['loaded_configs'][$this->settings['field_tiny_mce_conf']] = $this->EE->load->_ci_load(
-					array(
-						'_ci_path' => $this->tiny_mce_config_path . $this->settings['field_tiny_mce_conf'],
-						'_ci_vars' => array(
-							'field_class' => $field_class,
-							'field_height' => $this->settings['field_tiny_mce_height']
-						),
-						'_ci_return' => TRUE
-					)
-				)
-			);
-		}
-
-		return form_textarea(array(
-			'name'	=> $this->field_name,
-			'id'	=> $this->field_name,
-			'value'	=> $data,
-			'class' => $field_class
-		));
-
-	}
-
-	/**
-	 * Display the settings form for each custom field
-	 * 
-	 * @access public
-	 * @param $data mixed Not sure what this data is yet :S
-	 * @return string Override the field custom settings with custom html
-	 * 
-	 * In this case we add an extra row to the table. Not sure how the table is built
-	 */
-	public function display_settings($data)
-	{
-
-		$field_rows	= ($data['field_ta_rows'] == '') ? 6 : $data['field_ta_rows'];
-
-		if($configs = $this->_readTinyMCEConfigs())
-		{
-			foreach ($configs as $key => $value)
-			{
-				$options[$key] = ucfirst(str_replace(array("_", EXT), array(""), $key));
-			}
-		}
-
-		// new custom fields
-		if(isset($data['field_tiny_mce_conf']) == FALSE)
-		{
-			$data['field_tiny_mce_conf'] = FALSE;
-		}
-
-		$this->EE->table->add_row(
-			form_hidden($this->field_type.'_field_fmt', 'none') .
-			form_hidden('field_show_fmt', 'n') .
-			lang('TinyMCE Configuration', 'field_tiny_mce_conf'),
-			($configs) 
-				? form_dropdown($this->field_type.'_field_settings[field_tiny_mce_conf]', $options, $data['field_tiny_mce_conf'])
-				: "<p class='notice'>No configuration files could be found. Check that <code>".$this->tiny_mce_config_path."</code> is readable and contains at least one configuration file.</p>"
-				 . form_hidden($this->field_type.'_field_settings[field_tiny_mce_conf]', '')
-		);
-
-		$this->EE->table->add_row(
-			lang('TinyMCE hight in px', 'field_tiny_mce_height'),
-			form_input($this->field_type.'_field_settings[field_tiny_mce_height]', ($data['field_tiny_mce_height']) ? $data['field_tiny_mce_height'] : 300)
-		);
-
-	}
 
 	/**
 	 * Replaces the custom field tag
@@ -176,19 +91,60 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	}
 
 	/**
-	 * Save the custom field settings
+	 * Display the field in the publish form
 	 * 
-	 * @param $data array Not sure what this is yet, probably the submitted post data.
-	 * @return boolean Valid or not
+	 * @access public
+	 * @param $data String Contains the current field data. Blank for new entries.
+	 * @return String The custom field HTML
+	 * 
+	 * Includes the TinyMCE base script and the field specific configuration.
+	 * Returns a standard textarea with a configuration specific class
 	 */
-	public function save_settings($data)
+	public function display_field($data)
 	{
-		$new_settings = $this->EE->input->post('nsm_tiny_mce_field_settings');
-		if(empty($new_settings["field_tiny_mce_height"]))
+		$this->_addConfJs($this->settings["conf"]);
+		
+		$this->EE->cp->add_to_foot('<script type="text/javascript">'
+										. 'tinyMCE.settings = NsmTinyMCEConfigs["'.substr($this->settings["conf"], 0, -3).'"];'
+										. 'tinyMCE.execCommand("mceAddControl", true, "'.$this->field_name.'");'
+									. '</script>');
+		
+		return form_textarea(array(
+			'name'	=> $this->field_name,
+			'id'	=> $this->field_name,
+			'value'	=> $data,
+			'rows' => ' ',
+			'style' => "height: {$this->settings['height']}px"
+		));
+	}
+
+	/**
+	 * Displays the cell
+	 * 
+	 * @access public
+	 * @param $data The cell data
+	 */
+	public function display_cell($data)
+	{
+		$settings = $this->settings["nsm_tiny_mce"];
+		$this->_addConfJs($settings["conf"]);
+
+		if(!isset($this->EE->session->cache[__CLASS__]['cell_js_loaded']))
 		{
-			$new_settings["field_tiny_mce_height"] = 300;
+			$script_url = $this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/";
+			$this->EE->cp->add_to_foot("<script src='".$script_url."matrix2.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->session->cache[__CLASS__]['cell_js_loaded'] = TRUE;
 		}
-		return $new_settings;
+
+		$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEColConfig["col_id_'.$this->col_id.'"] = "'.substr($settings["conf"], 0, -3).'"</script>');
+
+		return form_textarea(array(
+			'name'	=> $this->cell_name,
+			'id'	=> $this->col_id,
+			'value'	=> $data,
+			'rows' => ' ',
+			'style' => "height: {$settings['height']}px"
+		));
 	}
 
 	/**
@@ -200,6 +156,186 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	public function validate($data)
 	{
 		return TRUE;
+	}
+
+	// /**
+	//  * Install the fieldtype
+	//  *
+	//  * @return array The default settings for the fieldtype
+	//  */
+	// public function install()
+	// {
+	// 	return $this->_defaultGlobalSettings();
+	// }
+
+	// /**
+	//  * Default global settings
+	//  */
+	// private function _defaultGlobalSettings()
+	// {
+	// 	return array("license_key" => FALSE);
+	// }
+	// 
+	// /**
+	//  * Save the global settings
+	//  * 
+	//  * @return array the new settings
+	//  */
+	// public function save_global_settings()
+	// {
+	// 	$new_settings = array_merge($this->settings, $_POST);
+	// 	return $new_settings;
+	// }
+
+	// /**
+	//  * Display the global settings
+	//  * 
+	//  * @return string the settings form
+	//  */
+	// public function display_global_settings()
+	// {
+	// 	$vars = array_merge($this->settings, $_POST);
+	// 	$r = $this->EE->load->view('global_settings', array('vars' => $vars), TRUE);
+	// 	return $r;
+	// }
+
+	/**
+	 * Default field settings
+	 * 
+	 * @access private
+	 * @return The default field settings
+	 */
+	private function _defaultFieldSettings(){
+		return array(
+			"conf" => FALSE,
+			"height" => 300
+		);
+	}
+
+	/**
+	 * Display the settings form for each custom field
+	 * 
+	 * @access public
+	 * @param $data mixed Not sure what this data is yet :S
+	 * @return string Override the field custom settings with custom html
+	 * 
+	 * In this case we add an extra row to the table. Not sure how the table is built
+	 */
+	public function display_settings($field_settings)
+	{
+		$field_settings = array_merge($this->_defaultFieldSettings(), $field_settings);
+		$rows = $this->_fieldSettings($field_settings);
+
+		// add the rows
+		foreach ($rows as $row)
+		{
+			$this->EE->table->add_row($row[0], $row[1]);
+		}
+	}
+
+	/**
+	 * Save the custom field settings
+	 * 
+	 * @param $data array Not sure what this is yet, probably the submitted post data.
+	 * @return boolean Valid or not
+	 */
+	public function save_settings($field_settings)
+	{
+		$field_settings = array_merge($this->_defaultFieldSettings(), $this->EE->input->post('nsm_tiny_mce'));
+
+		// Force formatting
+		$field_settings['field_fmt'] = 'none';
+		$field_settings['field_show_fmt'] = 'n';
+		$field_settings['field_type'] = 'nsm_tiny_mce';
+
+		// Cleanup
+		unset($_POST['nsm_tiny_mce']);
+		foreach (array_keys($field_settings) as $setting)
+		{
+			if (isset($_POST["nsm_tiny_mce_{$setting}"]))
+			{
+				unset($_POST["nsm_tiny_mce_{$setting}"]);
+			}
+		}
+
+		return $field_settings;
+	}
+
+	/**
+	 * Display Cell Settings
+	 * 
+	 * @access public
+	 * @param $cell_settings array The cell settings
+	 * @return array Label and form inputs
+	 */
+	public function display_cell_settings($cell_settings)
+	{
+		$cell_settings = array_merge($this->_defaultFieldSettings(), $cell_settings);
+		return $this->_fieldSettings($cell_settings);
+	}
+
+	/**
+	 * Prepares settings array for fields and matrix cells
+	 * 
+	 * @access public
+	 * @param $settings array The field / cell settings
+	 * @return array Labels and form inputs
+	 */
+	private function _fieldSettings($settings)
+	{
+		$r = array();
+
+		// TinyMCE height
+		$r[] = array(
+			lang('Height <small>in px</small>', 'nsm_tiny_mce_height'),
+			form_input("nsm_tiny_mce[height]", $settings['height'], "id='nsm_tiny_mce_height' class='matrix-textarea'")
+		);
+
+		// Configs
+		if($configs = $this->_readTinyMCEConfigs())
+		{
+			foreach ($configs as $key => $value)
+			{
+				$options[$key] = ucfirst(str_replace(array("_", ".js"), array(""), $key));
+			}
+			$confs = form_dropdown("nsm_tiny_mce[conf]", $options, $settings['conf'], "id='nsm_tiny_mce_conf'");
+		}
+		else
+		{
+			$confs = "<p class='notice'>
+							No configuration files could be found. Check that
+							<code>".$this->tiny_mce_config_path."</code>
+							is readable and contains at least one configuration file.
+						</p>";
+			$confs .= form_hidden("nsm_tiny_mce[conf]", '');
+		}
+
+		$r[] = array(
+					lang('Configuration', 'nsm_tiny_mce_conf'),
+					$confs
+				);
+		
+		return $r;
+	}
+
+	/**
+	 * Adds the TinyMCE configuration to the CP
+	 */
+	private function _addConfJs($conf, $cell = FALSE)
+	{
+		if(!isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']))
+		{
+			$script_url = $this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/";
+			$this->EE->cp->add_to_foot("<script src='".$script_url."tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEConfigs = {};</script>');
+			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
+		}
+
+		if(!in_array($conf, $this->EE->session->cache[__CLASS__]['loaded_configs']))
+		{
+			$this->EE->session->cache[__CLASS__]['loaded_configs'][] = $conf;
+			$this->EE->cp->add_to_foot("<script type='text/javascript' src='".$this->EE->config->system_url() . "expressionengine/third_party/nsm_tiny_mce/javascript/tiny_mce_config/".$conf."'></script>");
+		}
 	}
 
 	/**
@@ -228,7 +364,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 					while (false !== ($file = readdir($dir_handle)))
 					{
 						// if this is a real file
-						if ($file != "." && $file != ".." && $file != "Thumb.db" && substr($file, 0, 1) != '-' && substr($file, -4) == EXT)
+						if ($file != "." && $file != ".." && $file != "Thumb.db" && substr($file, 0, 1) != '-' && substr($file, -3) == ".js")
 						{
 							// add the config to the list
 							$configs[$file] = file_get_contents($dir.$file);
@@ -243,6 +379,6 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		// return the session var
 		return $this->EE->session->cache[__CLASS__]['tiny_mce_configs'];
 	}
-	
+
 }
 //END CLASS
