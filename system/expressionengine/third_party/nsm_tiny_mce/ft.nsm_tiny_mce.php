@@ -126,8 +126,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public function display_cell($data)
 	{
-		$settings = $this->settings["nsm_tiny_mce"];
-		$this->_addConfJs($settings["conf"]);
+		$this->_addConfJs($this->settings["conf"]);
 
 		if(!isset($this->EE->session->cache[__CLASS__]['cell_js_loaded']))
 		{
@@ -136,14 +135,14 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 			$this->EE->session->cache[__CLASS__]['cell_js_loaded'] = TRUE;
 		}
 
-		$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEColConfig["col_id_'.$this->col_id.'"] = "'.substr($settings["conf"], 0, -3).'"</script>');
+		$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEColConfig["col_id_'.$this->col_id.'"] = "'.substr($this->settings["conf"], 0, -3).'"</script>');
 
 		return form_textarea(array(
 			'name'	=> $this->cell_name,
 			'id'	=> $this->col_id,
 			'value'	=> $data,
 			'rows' => ' ',
-			'style' => "height: {$settings['height']}px"
+			'style' => "height: {$this->settings['height']}px"
 		));
 	}
 
@@ -259,6 +258,19 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		}
 
 		return $field_settings;
+	}
+
+	/**
+	 * Process the cell settings before saving
+	 * 
+	 * @access public
+	 * @param $col_settings array The settings for the column
+	 * @return array The new settings
+	 */
+	public function save_cell_settings($col_settings)
+	{
+		$col_settings = $col_settings['nsm_tiny_mce'];
+		return $col_settings;
 	}
 
 	/**
