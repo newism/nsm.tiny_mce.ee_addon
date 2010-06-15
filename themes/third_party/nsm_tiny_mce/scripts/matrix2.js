@@ -1,3 +1,13 @@
+/**
+ * Matrix integration for NSM TinyMCE
+ *
+ * @package			NSMTinyMCE
+ * @version			1.0.0RC2
+ * @author			Leevi Graham <leevi@newism.com.au>
+ * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
+ * @copyright 		Copyright (c) 2007-2010 Newism
+ * @license 		Commercial - please see LICENSE file included with this distribution
+ */
 (function($) {
 
 	NsmTinyMCEColConfig = {};
@@ -13,8 +23,8 @@
 
 		$textarea.attr('id', id);
 
-		console.log(NsmTinyMCEConfigs);
-		console.log(cell.col.id);
+		// console.log(NsmTinyMCEConfigs);
+		// console.log(cell.col.id);
 		tinyMCE.settings = NsmTinyMCEConfigs[NsmTinyMCEColConfig[cell.col.id]];
 		tinyMCE.execCommand("mceAddControl", true, id);
 	};
