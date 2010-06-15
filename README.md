@@ -13,7 +13,7 @@ NSM TinyMCE is an [ExpressionEngine 2](http://expressionengine.com/index.php?aff
 ## Screenshots
 
 [![NSM TinyMCE custom field settings](http://s3.amazonaws.com/ember/T8QlIz969laR9TZNHFcAhSbxAxCXwOAV_s.jpg "NSM TinyMCE custom field settings")](http://emberapp.com/leevigraham/images/nsm-tinymce-custom-field-settings-1/sizes/l)
-[![NSM TinyMCE publish form](http://s3.amazonaws.com/ember/Lx7NaGhbP2nn2kJoB4RMzEUUjuGVMgpq_s.jpg "NSM TinyMCE publish form")](http://emberapp.com/leevigraham/images/nsm-tinymce-ee2-custom-field/sizes/l)
+[![NSM TinyMCE custom field settings](http://s3.amazonaws.com/ember/hSHTScIKuQag5QGP4xMOL3cpFKmVXCJ4_s.jpg "NSM TinyMCE custom field settings")](http://emberapp.com/leevigraham/images/nms-tinymce-matrix/sizes/o)
 
 ## Installation
 
@@ -49,7 +49,7 @@ The key must be named the same as the actual file name. ie. If the configuration
 
 This custom field has been tested on EE 2.0.2 Build 20100430
 
-TinyMCE version 3.3.7 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
+TinyMCE version 3.3.5.1 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
 
 ## Todo
 
