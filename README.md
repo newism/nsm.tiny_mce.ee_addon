@@ -17,7 +17,12 @@ NSM TinyMCE is an [ExpressionEngine 2](http://expressionengine.com/index.php?aff
 
 ## Installation
 
-1. Copy `/system/expressionengine/third_party/nsm_tiny_mce` to `/your_system_folder/expressionengine/third_party/nsm_tiny_mce`
+### Download
+
+1. Download the master branch
+2. Rename the downloaded folder to `nsm_tiny_mce`
+3. Move the folder to `system/expressionengine/third_party`
+4. Move `themes/third_party/nsm_tiny_mce` from the downloaded files to `themes/third_party` in your EE install.
 
 ## Config files
 
@@ -28,7 +33,7 @@ Configuration example:
 	<script language="javascript" type="text/javascript">
 		NsmTinyMCEConfigs.basic = {
 			button_tile_map : true,
-			mode: none, // Must be none.
+			mode: 'none', // Must be none.
 			theme : 'advanced',
 			width : "99%",
 		};
@@ -44,7 +49,7 @@ The key must be named the same as the actual file name. ie. If the configuration
 
 This custom field has been tested on EE 2.0.2 Build 20100430
 
-TinyMCE version 3.3.5.1 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
+TinyMCE version 3.3.7 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
 
 ## Todo
 
