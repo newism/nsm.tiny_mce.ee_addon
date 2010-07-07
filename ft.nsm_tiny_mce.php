@@ -1,13 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * @package			NSMTinyMCE
- * @version			1.0.0RC2
- * @author			Leevi Graham <leevi@newism.com.au>
- * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
+ * NSM TinyMCE Fieldtype
+ *
+ * @package			NsmTinyMCE
+ * @version			1.0.0
+ * @author			Leevi Graham <http://leevigraham.com>
+ * @copyright 		Copyright (c) 2007-2010 Newism
+ * @license 		Commercial - please see LICENSE file included with this distribution
+ * @link			http://expressionengine-addons.com/nsm-tiny-mce
  * @see				http://expressionengine.com/public_beta/docs/development/fieldtypes.html
-*
-*/
+ */
 class Nsm_tiny_mce_ft extends EE_Fieldtype
 {
 	/**
@@ -18,7 +21,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public $info = array(
 		'name'		=> 'NSM TinyMCE',
-		'version'	=> '1.0.0RC2'
+		'version'	=> '1.0.0'
 	);
 
 	/**

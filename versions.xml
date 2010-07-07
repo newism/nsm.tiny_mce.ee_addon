@@ -3,11 +3,12 @@
  * XML Changelog for NSM TinyMCE
  *
  * @package			NSMTinyMCE
- * @version			1.0.0RC2
+ * @version			1.0.0
  * @author			Leevi Graham <leevi@newism.com.au>
  * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
  * @copyright 		Copyright (c) 2007-2010 Newism
  * @license 		Commercial - please see LICENSE file included with this distribution
+ * @see				http://expressionengine-addons.com/nsm-addon-updater
  */
 -->
 <?xml version="1.0" encoding="utf-8"?>

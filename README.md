@@ -1,4 +1,4 @@
-# NSM TinyMCE 1.0.0RC2
+# NSM TinyMCE
 
 Written by: Leevi Graham ([Twitter](http://twitter.com/leevigraham) | [Website](http://leevigraham.com)), Technical Director of [Newism](http://newism.com.au), based on [LG TinyMCE](http://leevigraham.com/cms-customisation/expressionengine/lg-tinymce/) (EE1.x)
 

@@ -2,7 +2,7 @@
  * Matrix integration for NSM TinyMCE
  *
  * @package			NSMTinyMCE
- * @version			1.0.0RC2
+ * @version			1.0.0
  * @author			Leevi Graham <leevi@newism.com.au>
  * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
  * @copyright 		Copyright (c) 2007-2010 Newism
