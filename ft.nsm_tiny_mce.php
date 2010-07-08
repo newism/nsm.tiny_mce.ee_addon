@@ -82,15 +82,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public function replace_tag($data, $params = FALSE, $tagdata = FALSE)
 	{
-		return $this->EE->typography->parse_type(
-			$this->EE->functions->encode_ee_tags($data),
-			array(
-				'text_format'	=> $this->settings['field_ft_'.$this->field_id],
-				'html_format'	=> $this->settings['channel_html_formatting'],
-				'auto_links'	=> $this->settings['channel_auto_link_urls'],
-				'allow_img_url' => $this->settings['channel_allow_img_urls']
-			)
-		);
+		return $data;
 	}
 
 	/**
