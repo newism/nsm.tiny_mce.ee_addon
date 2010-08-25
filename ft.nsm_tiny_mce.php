@@ -4,7 +4,7 @@
  * NSM TinyMCE Fieldtype
  *
  * @package			NsmTinyMCE
- * @version			1.0.1
+ * @version			1.1.0
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
  * @license 		Commercial - please see LICENSE file included with this distribution
@@ -21,7 +21,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public $info = array(
 		'name'		=> 'NSM TinyMCE',
-		'version'	=> '1.0.1'
+		'version'	=> '1.1.0'
 	);
 
 	/**
@@ -95,18 +95,21 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 * Includes the TinyMCE base script and the field specific configuration.
 	 * Returns a standard textarea with a configuration specific class
 	 */
-	public function display_field($data)
+	public function display_field($data, $field_id = false)
 	{
 		$this->_addConfJs($this->settings["conf"]);
+
+		if(!$field_id)
+			$field_id = $this->field_name;
 		
 		$this->EE->cp->add_to_foot('<script type="text/javascript">'
 										. 'tinyMCE.settings = NsmTinyMCEConfigs["'.substr($this->settings["conf"], 0, -3).'"];'
-										. 'tinyMCE.execCommand("mceAddControl", true, "'.$this->field_name.'");'
+										. 'tinyMCE.execCommand("mceAddControl", true, "'.$field_id.'");'
 									. '</script>');
 		
 		return form_textarea(array(
 			'name'	=> $this->field_name,
-			'id'	=> $this->field_name,
+			'id'	=> $field_id,
 			'value'	=> $data,
 			'rows' => ' ',
 			'style' => "height: {$this->settings['height']}px"
@@ -125,8 +128,8 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 		if(!isset($this->EE->session->cache[__CLASS__]['cell_js_loaded']))
 		{
-			$script_url = $this->_getThemeUrl() . "/scripts/";
-			$this->EE->cp->add_to_foot("<script src='{$script_url}matrix2.js' type='text/javascript' charset='utf-8'></script>");
+			$theme_url = $this->_getThemeUrl();
+			$this->EE->cp->add_to_foot("<script src='{$theme_url}/scripts/matrix2.js' type='text/javascript' charset='utf-8'></script>");
 			$this->EE->session->cache[__CLASS__]['cell_js_loaded'] = TRUE;
 		}
 
@@ -139,6 +142,18 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 			'rows' => ' ',
 			'style' => "height: {$this->settings['height']}px"
 		));
+	}
+
+	/**
+	 * Displays the Low Variable field
+	 * 
+	 * @access public
+	 * @param $var_data The variable data
+	 * @see http://loweblog.com/software/low-variables/docs/fieldtype-bridge/
+	 */
+	public function display_var_field($var_data)
+	{
+		return $this->display_field($var_data, "nsm_tiny_mce_"  . substr($this->field_name, 4, 1));
 	}
 
 	/**
@@ -206,26 +221,6 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		);
 	}
 
-	/**
-	 * Display the settings form for each custom field
-	 * 
-	 * @access public
-	 * @param $data mixed Not sure what this data is yet :S
-	 * @return string Override the field custom settings with custom html
-	 * 
-	 * In this case we add an extra row to the table. Not sure how the table is built
-	 */
-	public function display_settings($field_settings)
-	{
-		$field_settings = array_merge($this->_defaultFieldSettings(), $field_settings);
-		$rows = $this->_fieldSettings($field_settings);
-
-		// add the rows
-		foreach ($rows as $row)
-		{
-			$this->EE->table->add_row($row[0], $row[1]);
-		}
-	}
 
 	/**
 	 * Save the custom field settings
@@ -269,17 +264,19 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	}
 
 	/**
-	 * Display Cell Settings
+	 * Save the Low variable settings
 	 * 
 	 * @access public
-	 * @param $cell_settings array The cell settings
-	 * @return array Label and form inputs
+	 * @param $var_settings The variable settings
+	 * @see http://loweblog.com/software/low-variables/docs/fieldtype-bridge/
 	 */
-	public function display_cell_settings($cell_settings)
+	public function save_var_settings($var_settings)
 	{
-		$cell_settings = array_merge($this->_defaultFieldSettings(), $cell_settings);
-		return $this->_fieldSettings($cell_settings);
+		return $this->EE->input->post('nsm_tiny_mce');
 	}
+
+
+
 
 	/**
 	 * Prepares settings array for fields and matrix cells
@@ -326,16 +323,65 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	}
 
 	/**
+	 * Display the settings form for each custom field
+	 * 
+	 * @access public
+	 * @param $data mixed Not sure what this data is yet :S
+	 * @return string Override the field custom settings with custom html
+	 * 
+	 * In this case we add an extra row to the table. Not sure how the table is built
+	 */
+	public function display_settings($field_settings)
+	{
+		$field_settings = array_merge($this->_defaultFieldSettings(), $field_settings);
+		$rows = $this->_fieldSettings($field_settings);
+
+		// add the rows
+		foreach ($rows as $row)
+		{
+			$this->EE->table->add_row($row[0], $row[1]);
+		}
+	}
+
+	/**
+	 * Display Cell Settings
+	 * 
+	 * @access public
+	 * @param $cell_settings array The cell settings
+	 * @return array Label and form inputs
+	 */
+	public function display_cell_settings($cell_settings)
+	{
+		$cell_settings = array_merge($this->_defaultFieldSettings(), $cell_settings);
+		return $this->_fieldSettings($cell_settings);
+	}
+
+	/**
+	 * Display Variable Settings
+	 * 
+	 * @access public
+	 * @param $var_settings array The variable settings
+	 * @return array Label and form inputs
+	 */
+	public function display_var_settings($var_settings)
+	{
+		$var_settings = array_merge($this->_defaultFieldSettings(), $var_settings);
+		return $this->_fieldSettings($var_settings);
+	}
+
+	/**
 	 * Adds the TinyMCE configuration to the CP
 	 */
 	private function _addConfJs($conf, $cell = FALSE)
 	{
 		
-		$script_url = $this->_getThemeUrl() . "/scripts/";
+		$theme_url = $this->_getThemeUrl();
 
 		if(!isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']))
 		{
-			$this->EE->cp->add_to_foot("<script src='{$script_url}tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->cp->add_to_head("<link rel='stylesheet' href='{$theme_url}/styles/admin.css' type='text/css' media='screen' charset='utf-8' />");
+
+			$this->EE->cp->add_to_foot("<script src='{$theme_url}/scripts/tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
 			$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEConfigs = {};</script>');
 			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
 		}
@@ -343,7 +389,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		if(!in_array($conf, $this->EE->session->cache[__CLASS__]['loaded_configs']))
 		{
 			$this->EE->session->cache[__CLASS__]['loaded_configs'][] = $conf;
-			$this->EE->cp->add_to_foot("<script type='text/javascript' src='{$script_url}tiny_mce_config/{$conf}'></script>");
+			$this->EE->cp->add_to_foot("<script type='text/javascript' src='{$theme_url}/scripts/tiny_mce_config/{$conf}'></script>");
 		}
 	}
 
