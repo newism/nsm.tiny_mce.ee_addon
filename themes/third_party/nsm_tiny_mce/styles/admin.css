@@ -1,0 +1,21 @@
+/**
+ * Styles for NSM TinyMCE
+ *
+ * @package			NSMTinyMCE
+ * @version			1.1.0
+ * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
+ * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
+ * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
+ * @license 		Commercial - please see LICENSE file included with this distribution
+ */
+
+span.mceEditor, 
+span.mceEditor table,
+span.mceEditor tr,
+span.mceEditor td, 
+span.mceEditor td:last-child{border: none !important;  margin: 0 !important; padding:0}
+
+span.mceEditor > table{border: 1px solid #ccc !important; }
+span.mceEditor span.mceToolbar{border:none !important; margin: 0 !important; padding:0}
+span.mceEditor td.mceToolbar{background: rbga(255,255,255,1) !important; padding: 0 0 0 1px !important; border-bottom:1px solid #ccc !important}
+span.mceEditor td.mceStatusbar{border-top:1px solid #ccc !important; padding:3px;}
