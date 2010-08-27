@@ -167,47 +167,6 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		return TRUE;
 	}
 
-	// /**
-	//  * Install the fieldtype
-	//  *
-	//  * @return array The default settings for the fieldtype
-	//  */
-	// public function install()
-	// {
-	// 	return $this->_defaultGlobalSettings();
-	// }
-
-	// /**
-	//  * Default global settings
-	//  */
-	// private function _defaultGlobalSettings()
-	// {
-	// 	return array("license_key" => FALSE);
-	// }
-	// 
-	// /**
-	//  * Save the global settings
-	//  * 
-	//  * @return array the new settings
-	//  */
-	// public function save_global_settings()
-	// {
-	// 	$new_settings = array_merge($this->settings, $_POST);
-	// 	return $new_settings;
-	// }
-
-	// /**
-	//  * Display the global settings
-	//  * 
-	//  * @return string the settings form
-	//  */
-	// public function display_global_settings()
-	// {
-	// 	$vars = array_merge($this->settings, $_POST);
-	// 	$r = $this->EE->load->view('global_settings', array('vars' => $vars), TRUE);
-	// 	return $r;
-	// }
-
 	/**
 	 * Default field settings
 	 * 
@@ -220,7 +179,6 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 			"height" => 300
 		);
 	}
-
 
 	/**
 	 * Save the custom field settings
@@ -390,6 +348,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		{
 			$this->EE->session->cache[__CLASS__]['loaded_configs'][] = $conf;
 			$this->EE->cp->add_to_foot("<script type='text/javascript' src='{$theme_url}/scripts/tiny_mce_config/{$conf}'></script>");
+			
 		}
 	}
 
