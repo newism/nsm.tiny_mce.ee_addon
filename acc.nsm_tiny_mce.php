@@ -31,6 +31,10 @@ class Nsm_tiny_mce_acc
 		if(!isset($this->EE->session->cache[__CLASS__]))
 			$this->EE->session->cache[__CLASS__]['loaded_configs'] = array();
 
+		$theme_url = $this->_getThemeUrl();
+		$this->EE->cp->add_to_head("<link rel='stylesheet' href='{$theme_url}/styles/admin.css' type='text/css' media='screen' charset='utf-8' />");
+
+
 		if($this->EE->input->get('M') == 'category_edit' 
 			&& $catgegory_config = $this->EE->config->item('category_description_conf', 'nsm_tiny_mce'))
 		{
@@ -55,7 +59,7 @@ class Nsm_tiny_mce_acc
 			
 		}
 
-		$this->sections[] = '<script type="text/javascript" charset="utf-8">$("#accessoryTabs a.nsm_tiny_mce_acc").parent().remove();</script>';
+		// $this->sections[] = '<script type="text/javascript" charset="utf-8">$("#accessoryTabs a.nsm_tiny_mce_acc").parent().remove();</script>';
 	}
 
 	/**
