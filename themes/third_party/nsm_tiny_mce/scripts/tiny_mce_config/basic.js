@@ -37,7 +37,7 @@ NsmTinyMCEConfigs.basic = {
 	plugins : 'safari,pagebreak,style,inlinepopups,media,contextmenu,paste,'
 	+ 'fullscreen,nonbreaking,xhtmlxtras',
 	theme_advanced_buttons1 : 'cut,copy,pastetext,|,formatselect,|,bold,italic,'
-	+ 'strikethrough,acronym,abbr,ins,del,nonbreaking',
+	+ 'strikethrough,acronym,abbr,ins,del,nonbreaking,code',
 	theme_advanced_buttons2 : '',
 	theme_advanced_buttons3 : '',
 
