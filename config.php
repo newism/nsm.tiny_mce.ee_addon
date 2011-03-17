@@ -7,9 +7,9 @@
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
  * @license 		Commercial - please see LICENSE file included with this distribution
- * @link			http://expressionengine-addons.com/nsm-tiny-mce
- * @see				http://expressionengine-addons.com/nsm-addon-updater
+ * @link			http://ee-garage.com/nsm-tiny-mce
+ * @see				http://ee-garage.com/nsm-addon-updater
  */
 $config['name']    = 'NSM TinyMCE';
 $config['version'] = '1.1.0';
-$config['nsm_addon_updater']['versions_xml'] = 'http://expressionengine-addons.com/nsm-tiny-mce/release-notes';
+$config['nsm_addon_updater']['versions_xml'] = 'http://ee-garage.com/nsm-tiny-mce/release-notes';
