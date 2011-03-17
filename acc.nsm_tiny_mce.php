@@ -59,7 +59,7 @@ class Nsm_tiny_mce_acc
 			
 		}
 
-		// $this->sections[] = '<script type="text/javascript" charset="utf-8">$("#accessoryTabs a.nsm_tiny_mce_acc").parent().remove();</script>';
+		$this->sections[] = '<script type="text/javascript" charset="utf-8">$("#accessoryTabs a.nsm_tiny_mce_acc").parent().remove();</script>';
 	}
 
 	/**
