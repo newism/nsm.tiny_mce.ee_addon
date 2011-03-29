@@ -20,25 +20,32 @@ span.mceEditor span.mceToolbar{border:none !important; margin: 0 !important; pad
 span.mceEditor td.mceToolbar{background: rbga(255,255,255,1) !important; padding: 0 0 0 1px !important; border-bottom:1px solid #ccc !important}
 span.mceEditor td.mceStatusbar{border-top:1px solid #ccc !important; padding:3px;}
 
-#mainContent #registerUser span.mceEditor table{ margin:0; }
+
+#mainContent #registerUser span.mceEditor{
+	float:none;
+	clear:both;
+	padding-top:9px;
+	width:auto;
+}
+#mainContent #registerUser span.mceEditor table{ 
+}
 #mainContent #registerUser span.mceEditor table span{
 	display:block;
 	float:none;
 	width:auto;
 	margin:0;
 }
-#mainContent #registerUser span.mceEditor.defaultSkin span.mceIcon,
-#mainContent #registerUser span.mceEditor.defaultSkin img.mceIco{
+#mainContent #registerUser span.mceEditor table span.mceIcon,
+#mainContent #registerUser span.mceEditor table img.mceIco{
 	margin-right:3px;
 	width:20px;
 }
-#mainContent #registerUser span.mceEditor.defaultSkin span.mceSeparator{
+#mainContent #registerUser span.mceEditor table span.mceSeparator{
 	width:2px;
 	margin:0 5px;
 }
-#mainContent #registerUser #bio_parent{
-	float:none;
-	clear:both;
-	padding-top:9px;
-	width:auto;
+
+#mainContent #registerUser span.mceEditor table .mceStatusbar span{
+	display:inline;
+	font-weight:normal;
 }
