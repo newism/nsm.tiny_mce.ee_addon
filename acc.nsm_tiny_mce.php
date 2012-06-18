@@ -4,7 +4,7 @@
  * NSM TinyMCE Accessory
  *
  * @package			NsmTinyMCE
- * @version			1.1.0
+ * @version			1.1.1
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
  * @license 		Commercial - please see LICENSE file included with this distribution
@@ -15,7 +15,7 @@
 class Nsm_tiny_mce_acc 
 {
 	var $id;
-	var $version		= '1.0.0';
+	var $version		= '1.1.1';
 	var $name			= 'NSM TinyMCE';
 	var $description	= 'Update catgeory description and member fields to TinyMCE';
 	var $sections		= array();
