@@ -15,7 +15,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 {
 	/**
 	 * Field info - Required
-	 * 
+	 *
 	 * @access public
 	 * @var array
 	 */
@@ -26,7 +26,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * The field settings array
-	 * 
+	 *
 	 * @access public
 	 * @var array
 	 */
@@ -34,7 +34,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Path to the TinyMCE config files. Set in the constructor
-	 * 
+	 *
 	 * @access private
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * The field type - used for form field prefixes. Must be unique and match the class name. Set in the constructor
-	 * 
+	 *
 	 * @access private
 	 * @var string
 	 */
@@ -50,9 +50,9 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @access public
-	 * 
+	 *
 	 * Calls the parent constructor
 	 * Sets the tiny_mce_config_path using the PATH_THRID variable
 	 */
@@ -60,7 +60,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	{
 		parent::EE_Fieldtype();
 
-		$this->tiny_mce_config_path = PATH_THEMES . "third_party/nsm_tiny_mce/scripts/tiny_mce_config/";
+		$this->tiny_mce_config_path = PATH_THIRD_THEMES . "nsm_tiny_mce/scripts/tiny_mce_config/";
 
 		$this->field_type = $this->addon_id = strtolower(substr(__CLASS__, 0, -3));
 
@@ -68,17 +68,17 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		{
 			$this->EE->session->cache[__CLASS__]['loaded_configs'] = array();
 		}
-	}	
+	}
 
 	/**
 	 * Replaces the custom field tag
-	 * 
+	 *
 	 * @access public
 	 * @param $data string Contains the field data (or prepped data, if using pre_process)
 	 * @param $params array Contains field parameters (if any)
 	 * @param $tagdata mixed Contains data between tag (for tag pairs) FALSE for single tags
 	 * @return string The HTML replacing the tag
-	 * 
+	 *
 	 */
 	public function replace_tag($data, $params = FALSE, $tagdata = FALSE)
 	{
@@ -87,11 +87,11 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Display the field in the publish form
-	 * 
+	 *
 	 * @access public
 	 * @param $data String Contains the current field data. Blank for new entries.
 	 * @return String The custom field HTML
-	 * 
+	 *
 	 * Includes the TinyMCE base script and the field specific configuration.
 	 * Returns a standard textarea with a configuration specific class
 	 */
@@ -101,12 +101,12 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 		if(!$field_id)
 			$field_id = $this->field_name;
-		
+
 		$this->EE->cp->add_to_foot('<script type="text/javascript">'
 										. 'tinyMCE.settings = NsmTinyMCEConfigs["'.substr($this->settings["conf"], 0, -3).'"];'
 										. 'tinyMCE.execCommand("mceAddControl", true, "'.$field_id.'");'
 									. '</script>');
-		
+
 		return form_textarea(array(
 			'name'	=> $this->field_name,
 			'id'	=> $field_id,
@@ -118,7 +118,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Displays the cell
-	 * 
+	 *
 	 * @access public
 	 * @param $data The cell data
 	 */
@@ -140,7 +140,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Displays the Low Variable field
-	 * 
+	 *
 	 * @access public
 	 * @param $var_data The variable data
 	 * @see http://loweblog.com/software/low-variables/docs/fieldtype-bridge/
@@ -152,7 +152,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Publish form validation
-	 * 
+	 *
 	 * @param $data array Contains the submitted field data.
 	 * @return mixed TRUE or an error message
 	 */
@@ -163,7 +163,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Default field settings
-	 * 
+	 *
 	 * @access private
 	 * @return The default field settings
 	 */
@@ -176,7 +176,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Save the custom field settings
-	 * 
+	 *
 	 * @param $data array Not sure what this is yet, probably the submitted post data.
 	 * @return boolean Valid or not
 	 */
@@ -204,7 +204,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Process the cell settings before saving
-	 * 
+	 *
 	 * @access public
 	 * @param $col_settings array The settings for the column
 	 * @return array The new settings
@@ -217,7 +217,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Save the Low variable settings
-	 * 
+	 *
 	 * @access public
 	 * @param $var_settings The variable settings
 	 * @see http://loweblog.com/software/low-variables/docs/fieldtype-bridge/
@@ -232,7 +232,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Prepares settings array for fields and matrix cells
-	 * 
+	 *
 	 * @access public
 	 * @param $settings array The field / cell settings
 	 * @return array Labels and form inputs
@@ -270,17 +270,17 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 					lang('Configuration', 'nsm_tiny_mce_conf'),
 					$confs
 				);
-		
+
 		return $r;
 	}
 
 	/**
 	 * Display the settings form for each custom field
-	 * 
+	 *
 	 * @access public
 	 * @param $data mixed Not sure what this data is yet :S
 	 * @return string Override the field custom settings with custom html
-	 * 
+	 *
 	 * In this case we add an extra row to the table. Not sure how the table is built
 	 */
 	public function display_settings($field_settings)
@@ -297,7 +297,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Display Cell Settings
-	 * 
+	 *
 	 * @access public
 	 * @param $cell_settings array The cell settings
 	 * @return array Label and form inputs
@@ -310,7 +310,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Display Variable Settings
-	 * 
+	 *
 	 * @access public
 	 * @param $var_settings array The variable settings
 	 * @return array Label and form inputs
@@ -326,7 +326,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	private function _addConfJs($conf, $cell = FALSE)
 	{
-		
+
 		$theme_url = $this->_getThemeUrl();
 
 		if(!isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']))
@@ -342,13 +342,13 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		{
 			$this->EE->session->cache[__CLASS__]['loaded_configs'][] = $conf;
 			$this->EE->cp->add_to_foot("<script type='text/javascript' src='{$theme_url}/scripts/tiny_mce_config/{$conf}'></script>");
-			
+
 		}
 	}
 
 	/**
 	 * Get the current themes URL from the theme folder + / + the addon id
-	 * 
+	 *
 	 * @access private
 	 * @return string The theme URL
 	 */
@@ -357,9 +357,9 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		$EE =& get_instance();
 		if(!isset($EE->session->cache[$this->addon_id]['theme_url']))
 		{
-			$theme_url = $EE->config->item('theme_folder_url');
+			$theme_url = URL_THIRD_THEMES;
 			if (substr($theme_url, -1) != '/') $theme_url .= '/';
-			$theme_url .= "third_party/" . $this->addon_id;
+			$theme_url .= $this->addon_id;
 			$EE->session->cache[$this->addon_id]['theme_url'] = $theme_url;
 		}
 		return $EE->session->cache[$this->addon_id]['theme_url'];
@@ -367,7 +367,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 	/**
 	 * Reads the custom TinyMCE configs from the directory
-	 * 
+	 *
 	 * @access private
 	 * @return mixed FALSE if no configs are found or an array of filenames
 	 */
