@@ -58,7 +58,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public function __construct()
 	{
-		parent::EE_Fieldtype();
+		parent::__construct();
 
 		$this->tiny_mce_config_path = PATH_THIRD_THEMES . "nsm_tiny_mce/scripts/tiny_mce_config/";
 
