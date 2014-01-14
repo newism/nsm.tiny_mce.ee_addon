@@ -41,7 +41,7 @@ class Nsm_tiny_mce_acc
 			$this->_addConfJs($catgegory_config);
 			$this->EE->cp->add_to_foot('<script type="text/javascript">'
 											. 'tinyMCE.settings = NsmTinyMCEConfigs["'.$catgegory_config.'"];'
-											. 'tinyMCE.execCommand("mceAddControl", true, "cat_description");'
+											. 'tinyMCE.execCommand("mceAddEditor", true, "cat_description");'
 										. '</script>');
 		}
 		
@@ -53,7 +53,7 @@ class Nsm_tiny_mce_acc
 				$this->_addConfJs($conf);
 				$this->EE->cp->add_to_foot('<script type="text/javascript">'
 												. 'tinyMCE.settings = NsmTinyMCEConfigs["'.$conf.'"];'
-												. 'tinyMCE.execCommand("mceAddControl", true, "'.$member_field.'");'
+												. 'tinyMCE.execCommand("mceAddEditor", true, "'.$member_field.'");'
 											. '</script>');
 			}
 			
@@ -72,7 +72,7 @@ class Nsm_tiny_mce_acc
 
 		if(!isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']))
 		{
-			$this->EE->cp->add_to_foot("<script src='{$script_url}tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->cp->add_to_foot("<script src='{$script_url}tinymce/tinymce.min.js' type='text/javascript' charset='utf-8'></script>");
 			$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEConfigs = {};</script>');
 			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
 		}

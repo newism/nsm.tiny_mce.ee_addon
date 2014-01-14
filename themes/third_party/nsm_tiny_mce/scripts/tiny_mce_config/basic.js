@@ -2,7 +2,6 @@ NsmTinyMCEConfigs.basic = {
 
 	button_tile_map : true,
 	mode: 'none',
-	theme : 'advanced',
 	width : "99%",
 
 	// Cleanup/Output
@@ -34,8 +33,8 @@ NsmTinyMCEConfigs.basic = {
 	Basic configuration
 	My Favs - Simple but effective
 */
-	plugins : 'safari,pagebreak,style,inlinepopups,media,contextmenu,paste,'
-	+ 'fullscreen,nonbreaking,xhtmlxtras',
+	plugins : 'pagebreak,media,contextmenu,paste,'
+	+ 'fullscreen,nonbreaking',
 	theme_advanced_buttons1 : 'cut,copy,pastetext,|,formatselect,|,bold,italic,'
 	+ 'strikethrough,acronym,abbr,ins,del,nonbreaking,code',
 	theme_advanced_buttons2 : '',

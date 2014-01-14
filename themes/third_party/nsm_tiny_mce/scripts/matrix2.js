@@ -26,7 +26,7 @@
 		// console.log(NsmTinyMCEConfigs);
 		// console.log(cell.col.id);
 		tinyMCE.settings = NsmTinyMCEConfigs[NsmTinyMCEColConfig[cell.col.id]];
-		tinyMCE.execCommand("mceAddControl", true, id);
+		tinyMCE.execCommand("mceAddEditor", true, id);
 	};
 
 	Matrix.bind('nsm_tiny_mce', 'display', onDisplay);
