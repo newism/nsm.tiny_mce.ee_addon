@@ -47,9 +47,9 @@ The key must be named the same as the actual file name. ie. If the configuration
 
 ## Notes
 
-This custom field has been tested on EE 2.0.2 Build 20100430
+This custom field has been tested on EE 2.8.0
 
-TinyMCE version 3.3.5.1 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
+TinyMCE version 4.0.12 is included with the addon. Please review the [TinyMCE license](http://tinymce.moxiecode.com/license.php).
 
 ## Todo
 
