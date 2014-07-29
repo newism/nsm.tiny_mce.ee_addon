@@ -2,7 +2,7 @@
  * Matrix integration for NSM TinyMCE
  *
  * @package			NSMTinyMCE
- * @version			1.1.0
+ * @version			1.2.0
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @link			http://github.com/newism/nsm.tiny_mce.ee_addon
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
@@ -26,7 +26,7 @@
 		// console.log(NsmTinyMCEConfigs);
 		// console.log(cell.col.id);
 		tinyMCE.settings = NsmTinyMCEConfigs[NsmTinyMCEColConfig[cell.col.id]];
-		tinyMCE.execCommand("mceAddControl", true, id);
+		tinyMCE.execCommand("mceAddEditor", true, id);
 	};
 
 	Matrix.bind('nsm_tiny_mce', 'display', onDisplay);

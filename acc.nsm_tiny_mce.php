@@ -4,7 +4,7 @@
  * NSM TinyMCE Accessory
  *
  * @package			NsmTinyMCE
- * @version			1.1.1
+ * @version			1.2.0
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
  * @license 		Commercial - please see LICENSE file included with this distribution
@@ -15,7 +15,7 @@
 class Nsm_tiny_mce_acc 
 {
 	var $id;
-	var $version		= '1.1.1';
+	var $version		= '1.2.0';
 	var $name			= 'NSM TinyMCE';
 	var $description	= 'Update catgeory description and member fields to TinyMCE';
 	var $sections		= array();
@@ -41,7 +41,7 @@ class Nsm_tiny_mce_acc
 			$this->_addConfJs($catgegory_config);
 			$this->EE->cp->add_to_foot('<script type="text/javascript">'
 											. 'tinyMCE.settings = NsmTinyMCEConfigs["'.$catgegory_config.'"];'
-											. 'tinyMCE.execCommand("mceAddControl", true, "cat_description");'
+											. 'tinyMCE.execCommand("mceAddEditor", true, "cat_description");'
 										. '</script>');
 		}
 		
@@ -53,7 +53,7 @@ class Nsm_tiny_mce_acc
 				$this->_addConfJs($conf);
 				$this->EE->cp->add_to_foot('<script type="text/javascript">'
 												. 'tinyMCE.settings = NsmTinyMCEConfigs["'.$conf.'"];'
-												. 'tinyMCE.execCommand("mceAddControl", true, "'.$member_field.'");'
+												. 'tinyMCE.execCommand("mceAddEditor", true, "'.$member_field.'");'
 											. '</script>');
 			}
 			
@@ -72,7 +72,7 @@ class Nsm_tiny_mce_acc
 
 		if(!isset($this->EE->session->cache[__CLASS__]['tiny_mce_loaded']))
 		{
-			$this->EE->cp->add_to_foot("<script src='{$script_url}tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->cp->add_to_foot("<script src='{$script_url}tinymce/tinymce.min.js' type='text/javascript' charset='utf-8'></script>");
 			$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEConfigs = {};</script>');
 			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
 		}

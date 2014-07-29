@@ -1,6 +1,12 @@
 NSM TinyMCE - Changelog
 =======================
 
+v 1.2.0
+----------
+
+* [enhancement] Updated TinyMCE libraries to v4.0.12
+* [fix] Addressed EE 2.8 compatibility issues
+
 v 1.1.1
 ----------
 

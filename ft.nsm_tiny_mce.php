@@ -4,7 +4,7 @@
  * NSM TinyMCE Fieldtype
  *
  * @package			NsmTinyMCE
- * @version			1.1.1
+ * @version			1.2.0
  * @author			Leevi Graham <http://leevigraham.com> - Technical Director, Newism
  * @copyright 		Copyright (c) 2007-2010 Newism <http://newism.com.au>
  * @license 		Commercial - please see LICENSE file included with this distribution
@@ -21,7 +21,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 	 */
 	public $info = array(
 		'name'		=> 'NSM TinyMCE',
-		'version'	=> '1.1.1'
+		'version'	=> '1.2.0'
 	);
 
 	/**
@@ -104,7 +104,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 
 		$this->EE->cp->add_to_foot('<script type="text/javascript">'
 										. 'tinyMCE.settings = NsmTinyMCEConfigs["'.substr($this->settings["conf"], 0, -3).'"];'
-										. 'tinyMCE.execCommand("mceAddControl", true, "'.$field_id.'");'
+										. 'tinyMCE.execCommand("mceAddEditor", true, "'.$field_id.'");'
 									. '</script>');
 
 		return form_textarea(array(
@@ -333,7 +333,7 @@ class Nsm_tiny_mce_ft extends EE_Fieldtype
 		{
 			$this->EE->cp->add_to_head("<link rel='stylesheet' href='{$theme_url}/styles/admin.css' type='text/css' media='screen' charset='utf-8' />");
 
-			$this->EE->cp->add_to_foot("<script src='{$theme_url}/scripts/tiny_mce/tiny_mce.js' type='text/javascript' charset='utf-8'></script>");
+			$this->EE->cp->add_to_foot("<script src='{$theme_url}/scripts/tinymce/tinymce.min.js' type='text/javascript' charset='utf-8'></script>");
 			$this->EE->cp->add_to_foot('<script type="text/javascript">NsmTinyMCEConfigs = {};</script>');
 			$this->EE->session->cache[__CLASS__]['tiny_mce_loaded'] = TRUE;
 		}
